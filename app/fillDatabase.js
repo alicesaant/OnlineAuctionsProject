@@ -65,12 +65,23 @@ module.exports = {
                     for (let i = 0; i < numBids; i++) {
                         const newBidAmount = currentMaxBid + Math.floor(Math.random() * 500) + 1;
                         currentMaxBid = newBidAmount;
+
+                        const lastBid = await mongo.collection("bids").findOne({
+                            auctionId: auction.auctionId
+                        }, { sort: { createdAt: -1 } });
             
-                        const bidDate = new Date(auction.endDate);
+                        let bidDate = new Date(auction.endDate);
                         bidDate.setDate(bidDate.getDate() - Math.floor(Math.random() * (7 + 1)));
                         bidDate.setHours(Math.floor(Math.random() * 24));
                         bidDate.setMinutes(Math.floor(Math.random() * 60));
                         bidDate.setSeconds(Math.floor(Math.random() * 60));
+
+                        if (lastBid) {
+                            const lastBidDate = new Date(lastBid.createdAt);
+                            if (bidDate <= lastBidDate) {
+                                bidDate = new Date(lastBidDate.getTime() + 1000);
+                            }
+                        }
                         const createdAt = bidDate.toISOString().replace('T', ' ').split('.')[0];
                         const randomUser = users[Math.floor(Math.random() * users.length)];
 
