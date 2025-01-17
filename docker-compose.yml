@@ -1,0 +1,19 @@
+services:
+  sant_app:
+    container_name: sant_app
+    build: .
+    command: nodemon --legacy-watch . -e js app.js
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/var/www
+    links:
+      - "sant_mongo:mongohost"
+
+  sant_mongo:
+    container_name: sant_mongo
+    image: mongo:latest
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"

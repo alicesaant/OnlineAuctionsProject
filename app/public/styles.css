@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+nav {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.container {
+    max-width: 1200px;
+}
+table {
+    word-wrap: break-word;
+}
+th, td {
+    vertical-align: middle !important;
+    text-align: center;
+    font-size: 1.25rem;
+}
+.form-control {
+    max-width: 400px;
+}
+.form-label {
+    text-align: center;
+    font-size: 1.25rem;
+}
+h1, h2 {
+    text-align: left;
+    color: #343a40;
+}
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+@media (max-width: 768px) {
+    h1, h2, h3 {
+        font-size: 1.5rem;
+    }
+    .btn {
+        font-size: 0.9rem;
+    }
+    nav .navbar-brand {
+        font-size: 1.2rem;
+    }
+}
+.message-container {
+    max-width: 600px;
+    margin: 0 auto;
+    word-wrap: break-word;
+    padding: 10px 0;
+    text-align: center;
+}
+.custom-card {
+    max-width: 400px;
+    width: auto;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
