@@ -111,7 +111,7 @@
                             </td>
                         </tr>
                         <tr v-if="showBidsDetails && selectedAuctionId !== null">
-                            <td colspan="8" class="table-secondary">
+                            <td colspan="8" class="table-secondary" ref="bidsTableHome">
                                 <h3>Bids for {{ auctions.find(a => a.auctionId === selectedAuctionId)?.title }}</h3>
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark">
@@ -220,7 +220,7 @@
                             </tr>
                         </tr>
                         <tr v-if="showDetails && selectedUserId !== null">
-                            <td colspan="8" class="table-secondary">
+                            <td colspan="8" class="table-secondary" ref="userDetailsTable">
                                 <h3>{{ users.find(u => u.userId === selectedUserId)?.username }}'s won auctions</h3>
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark">
@@ -318,7 +318,7 @@
                             </td>
                         </tr>
                         <tr v-if="showBidsDetails && selectedAuctionId !== null">
-                            <td colspan="8" class="table-secondary">
+                            <td colspan="8" class="table-secondary" ref="bidsTable">
                                 <h3>Bids for {{ auctions.find(a => a.auctionId === selectedAuctionId)?.title }}</h3>
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark">

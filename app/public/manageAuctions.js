@@ -18,6 +18,8 @@ export default function useManageAuctions() {
     const bids = Vue.ref([]);
     const selectedAuctionId = Vue.ref(null);
     const showBidsDetails = Vue.ref(false);
+    const bidsTable = Vue.ref(null);
+    const bidsTableHome = Vue.ref(null);
 
     const isCreator = (auctionCreator) => {
         const authenticatedUser = localStorage.getItem('username');
@@ -186,6 +188,12 @@ export default function useManageAuctions() {
         }, 5000);
     };
 
+    const scrollToBidsTable = (targetTable) => {
+        if (targetTable && targetTable.value) {
+            targetTable.value.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     const getBidsForAuction = async (auctionId) => {
         try {
             const response = await fetch(`/api/auctions/${auctionId}/bids`, {
@@ -201,6 +209,10 @@ export default function useManageAuctions() {
             selectedAuctionId.value = auctionId;
             showBidsDetails.value = true;
 
+            setTimeout(() => {
+                scrollToBidsTable(bidsTableHome);
+                scrollToBidsTable(bidsTable);
+            }, 100);
         } catch (error) {
             console.error("Error fetching user details:", error);
             noAuctionsMessage.value = "Error fetching auctions. Please try again later.";
@@ -221,6 +233,8 @@ export default function useManageAuctions() {
         bids,
         selectedAuctionId,
         showBidsDetails,
+        bidsTable,
+        bidsTableHome,
         isCreator,
         getAllAuctions,
         searchAuction,
@@ -231,5 +245,6 @@ export default function useManageAuctions() {
         deleteAuction,
         getBidsForAuction,
         closeBidsDetails,
+        scrollToBidsTable,
     };
 }

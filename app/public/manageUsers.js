@@ -5,6 +5,7 @@ export default function useManageUsers() {
     const wonAuctions = Vue.ref([]);
     const selectedUserId = Vue.ref(null);
     const showDetails = Vue.ref(false);
+    const userDetailsTable = Vue.ref(null);
 
     const getAllUsers = async () => {
         try {
@@ -49,6 +50,12 @@ export default function useManageUsers() {
         }
     };
 
+    const scrollToUserDetailsTable = () => {
+        if (userDetailsTable.value) {
+            userDetailsTable.value.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     const getUserById = async (userId) => {
         try {
             const response = await fetch(`/api/users/${userId}`, {
@@ -64,6 +71,10 @@ export default function useManageUsers() {
             wonAuctions.value = await response.json();
             selectedUserId.value = userId;
             showDetails.value = true;
+
+            setTimeout(() => {
+                scrollToUserDetailsTable();
+            }, 100);
 
         } catch (error) {
             console.error("Error fetching user details:", error);
@@ -83,9 +94,11 @@ export default function useManageUsers() {
         wonAuctions,
         selectedUserId,
         showDetails,
+        userDetailsTable,
         getAllUsers,
         searchUser,
         getUserById,
-        closeDetails
+        closeDetails,
+        scrollToUserDetailsTable,
     };
 }
